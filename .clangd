@@ -1,0 +1,32 @@
+# Clangd config — absolute -I paths (required for fallback compile mode).
+CompileFlags:
+  Add:
+    - -std=c++20
+    - -DANDROID
+    - -D__ANDROID__
+    - -DDEBUG_ONLY_CODE=0
+    - -I/home/will/code/anduril/aosp/clangd-stubs
+    - -I/home/will/code/anduril/aosp/native/include
+    - -I/home/will/code/anduril/aosp/native/libs/gui/include
+    - -I/home/will/code/anduril/aosp/native/libs/ui/include
+    - -I/home/will/code/anduril/aosp/native/libs/binder/include
+    - -I/home/will/code/anduril/aosp/native/libs/binder/liblog_stub/include
+    - -I/home/will/code/anduril/aosp/native/libs/nativewindow/include
+    - -I/home/will/code/anduril/aosp/native/libs/nativebase/include
+    - -I/home/will/code/anduril/aosp/native/libs/gralloc/types/include
+    - -I/home/will/code/anduril/aosp/native/libs/math/include
+    - -I/home/will/code/anduril/aosp/native/libs/renderengine/include
+    - -I/home/will/code/anduril/aosp/native/services/surfaceflinger
+    - -I/home/will/code/anduril/aosp/native/services/surfaceflinger/Scheduler/include
+    - -I/home/will/code/anduril/aosp/native/services/surfaceflinger/CompositionEngine/include
+    - -I/home/will/code/anduril/aosp/native/services/surfaceflinger/common/include
+    - -I/home/will/code/anduril/aosp/hardware/include
+    - -I/home/will/code/anduril/aosp/interfaces/graphics/mapper/stable-c/include
+    - -Wno-everything
+
+Diagnostics:
+  UnusedIncludes: None
+  MissingIncludes: None
+
+Index:
+  Background: Build
