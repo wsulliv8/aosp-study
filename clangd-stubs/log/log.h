@@ -16,3 +16,6 @@ typedef enum android_LogPriority {
 
 int __android_log_print(int prio, const char* tag, const char* fmt, ...);
 int __android_log_is_loggable(int prio, const char* tag, int default_prio);
+
+#define android_errorWriteLog(...) ((void)0)
+#define android_errorWriteWithInfoLog(...) ((void)0)

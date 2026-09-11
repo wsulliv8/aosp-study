@@ -1,17 +1,29 @@
 #pragma once
 
-#include <utils/RefBase.h>
+#include <stdint.h>
+#include <sys/types.h>
 
 namespace android {
 
 template <typename T>
-class LightRefBase : public virtual RefBase {
+class LightRefBase {
 public:
-    void incStrong(const void* id) const { RefBase::incStrong(id); }
-    void decStrong(const void* id) const { RefBase::decStrong(id); }
+    inline LightRefBase() : mCount(0) {}
+    inline void incStrong(__attribute__((unused)) const void* id) const {
+        __sync_fetch_and_add(&mCount, 1);
+    }
+    inline void decStrong(__attribute__((unused)) const void* id) const {
+        if (__sync_fetch_and_sub(&mCount, 1) == 1) {
+            delete static_cast<const T*>(this);
+        }
+    }
+    inline int32_t getStrongCount() const { return mCount; }
 
 protected:
-    virtual ~LightRefBase() = default;
+    inline ~LightRefBase() {}
+
+private:
+    mutable volatile int32_t mCount;
 };
 
 } // namespace android

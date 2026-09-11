@@ -1,6 +1,5 @@
 /*
- * Minimal stub headers for clangd navigation in a partial AOSP checkout.
- * These are NOT buildable implementations — only enough for IDE indexing.
+ * Minimal stub for clangd navigation in a partial AOSP checkout.
  */
 #pragma once
 
@@ -8,20 +7,31 @@
 #include <stdint.h>
 #include <sys/types.h>
 
+namespace android {
+
 typedef int32_t status_t;
 
-static constexpr status_t NO_ERROR = 0;
-static constexpr status_t NO_MEMORY = -ENOMEM;
-static constexpr status_t INVALID_OPERATION = -ENOSYS;
-static constexpr status_t BAD_VALUE = -EINVAL;
-static constexpr status_t BAD_TYPE = (status_t)(0x80000001);
-static constexpr status_t NAME_NOT_FOUND = -ENOENT;
-static constexpr status_t PERMISSION_DENIED = -EPERM;
-static constexpr status_t NO_INIT = -ENODEV;
-static constexpr status_t ALREADY_EXISTS = -EEXIST;
-static constexpr status_t DEAD_OBJECT = -EPIPE;
-static constexpr status_t TIMED_OUT = -ETIMEDOUT;
-static constexpr status_t WOULD_BLOCK = -EWOULDBLOCK;
-static constexpr status_t NO_BUFFER_AVAILABLE = (status_t)(0x80000004);
-static constexpr status_t UNKNOWN_TRANSACTION = (status_t)(0x80000002);
-static constexpr status_t FAILED_TRANSACTION = (status_t)(0x80000003);
+enum {
+    OK = 0,
+    NO_ERROR = 0,
+    UNKNOWN_ERROR = (-2147483647 - 1),
+    NO_MEMORY = -ENOMEM,
+    INVALID_OPERATION = -ENOSYS,
+    BAD_VALUE = -EINVAL,
+    BAD_TYPE = (UNKNOWN_ERROR + 1),
+    NAME_NOT_FOUND = -ENOENT,
+    PERMISSION_DENIED = -EPERM,
+    NO_INIT = -ENODEV,
+    ALREADY_EXISTS = -EEXIST,
+    DEAD_OBJECT = -EPIPE,
+    FAILED_TRANSACTION = (UNKNOWN_ERROR + 2),
+    BAD_INDEX = -EOVERFLOW,
+    NOT_ENOUGH_DATA = -ENODATA,
+    WOULD_BLOCK = -EWOULDBLOCK,
+    TIMED_OUT = -ETIMEDOUT,
+    UNKNOWN_TRANSACTION = -EBADMSG,
+    FDS_NOT_ALLOWED = (UNKNOWN_ERROR + 7),
+    UNEXPECTED_NULL = (UNKNOWN_ERROR + 8),
+};
+
+} // namespace android
